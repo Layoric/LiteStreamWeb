@@ -23,11 +23,11 @@ namespace LiteStreamWeb
                 appHost.ScriptContext.ScriptMethods.Add(new DbScriptsAsync());
 
                 // Create non-existing Table and add Seed Data Example
-                using var db = appHost.Resolve<IDbConnectionFactory>().Open();
-                if (db.CreateTableIfNotExists<MyTable>())
-                {
-                    db.Insert(new MyTable { Name = "Seed Data for new MyTable" });
-                }
+                // using var db = appHost.Resolve<IDbConnectionFactory>().Open();
+                // if (db.CreateTableIfNotExists<MyTable>())
+                // {
+                //     db.Insert(new MyTable { Name = "Seed Data for new MyTable" });
+                // }
             });
     }
 }

@@ -9,11 +9,7 @@ namespace LiteStreamWeb
         public void Configure(IWebHostBuilder builder) => builder
             .ConfigureAppHost(appHost => {
                 appHost.Plugins.Add(new AutoQueryFeature {
-                    MaxLimit = 1000,
-                    GenerateCrudServices = new GenerateCrudServices()
-                    {
-                        AutoRegister = true
-                    }
+                    MaxLimit = 1000
                 });
             });
     }
