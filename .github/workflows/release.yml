@@ -83,6 +83,9 @@ jobs:
           echo "image_repository_name=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
           echo "domain=${{ secrets.DEPLOY_HOST }}" >> $GITHUB_ENV
           echo "letsencrypt_email=${{ secrets.LETSENCRYPT_EMAIL }}" >> $GITHUB_ENV
+          echo "aws_s3_bucket=${{ secrets.AWS_S3_BUCKET }}" >> $GITHUB_ENV
+          echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+          echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
           echo "TAG_NAME=latest" >> $GITHUB_ENV
           if [ "${{ github.event.release.tag_name }}" != "" ]; then
             echo "TAG_NAME=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
@@ -100,6 +103,9 @@ jobs:
           APP_NAME: ${{ github.event.repository.name }}
           HOST_DOMAIN: ${{ env.domain }}
           LETSENCRYPT_EMAIL: ${{ env.letsencrypt_email }}
+          AWS_S3_BUCKET: ${{ env.aws_s3_bucket }}
+          AWS_ACCESS_KEY_ID: ${{ env.aws_access_key_id }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.aws_secret_access_key }}
         with:
           input: .deploy/docker-compose-template.yml
           output: .deploy/${{ github.event.repository.name }}-docker-compose.yml
