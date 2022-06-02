@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ServiceStack" Version="6.*" />
+    <PackageReference Include="ServiceStack.OrmLite" Version="6.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LiteStreamWeb.ServiceModel\LiteStreamWeb.ServiceModel.csproj" />
+  </ItemGroup>
+
+</Project>

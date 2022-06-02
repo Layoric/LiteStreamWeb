@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Include="LiteStreamWeb" />
+    <Using Include="ServiceStack" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ServiceStack" Version="6.*" />
+    <PackageReference Include="ServiceStack.OrmLite.Sqlite" Version="6.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LiteStreamWeb.ServiceInterface\LiteStreamWeb.ServiceInterface.csproj" />
+    <ProjectReference Include="..\LiteStreamWeb.ServiceModel\LiteStreamWeb.ServiceModel.csproj" />
+  </ItemGroup>
+
+</Project>

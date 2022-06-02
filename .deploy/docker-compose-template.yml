@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  LiteStreamWeb:
+    image: ${IMAGE_REPO}:${RELEASE_VERSION}
+    restart: always
+    network_mode: bridge
+    ports:
+      - "80"
+    environment:
+      VIRTUAL_HOST: ${HOST_DOMAIN}
+      LETSENCRYPT_HOST: ${HOST_DOMAIN}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+    volumes:
+      - mydb:/app/App_Data
+  litestream:
+    image: litestream/litestream
+    command: replicate /data/LiteStreamWeb.sqlite s3://${AWS_S3_BUCKET}/LiteStreamWeb.sqlite
+    environment:
+      LITESTREAM_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      LITESTREAM_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    volumes:
+      - mydb:/data
+
+volumes:
+  mydb:
