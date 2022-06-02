@@ -14,7 +14,9 @@ services:
       - mydb:/app/App_Data
   litestream:
     image: litestream/litestream
-    command: replicate /data/LiteStreamWeb.sqlite s3://${AWS_S3_BUCKET}/LiteStreamWeb.sqlite
+    command: >
+        restore s3://${AWS_S3_BUCKET}/LiteStreamWeb.sqlite -path /data/LiteStreamWeb.sqlite -if-db-not-exists
+        && replicate /data/LiteStreamWeb.sqlite s3://${AWS_S3_BUCKET}/LiteStreamWeb.sqlite
     environment:
       LITESTREAM_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       LITESTREAM_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
