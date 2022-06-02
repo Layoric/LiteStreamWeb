@@ -22,3 +22,8 @@ public class MyTable
     public int Id { get; set; }
     public string Name { get; set; }
 }
+
+public class QueryMyTable : QueryDb<MyTable>
+{
+    
+}
