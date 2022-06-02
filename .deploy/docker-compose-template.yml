@@ -11,17 +11,19 @@ services:
       LETSENCRYPT_HOST: ${HOST_DOMAIN}
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
     volumes:
-      - mydb:/app/App_Data
-  litestream:
+      - ${APP_NAME}-mydb:/app/App_Data
+  ${APP_NAME}-litestream:
     image: litestream/litestream
-    command: >
-        restore s3://${AWS_S3_BUCKET}/LiteStreamWeb.sqlite -if-db-not-exists
-        && replicate /data/LiteStreamWeb.sqlite s3://${AWS_S3_BUCKET}/LiteStreamWeb.sqlite
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+    - |
+       /usr/local/bin/litestream restore -if-db-not-exists -o /data/LiteStreamWeb.sqlite s3://ss-litestream/LiteStreamWeb.sqlite
+       /usr/local/bin/litestream replicate /data/LiteStreamWeb.sqlite s3://ss-litestream/LiteStreamWeb.sqlite
     environment:
       LITESTREAM_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       LITESTREAM_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     volumes:
-      - mydb:/data
+      - ${APP_NAME}-mydb:/data
 
 volumes:
-  mydb:
+  ${APP_NAME}-mydb:
