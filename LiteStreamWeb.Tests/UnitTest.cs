@@ -3,6 +3,8 @@ using ServiceStack;
 using ServiceStack.Testing;
 using LiteStreamWeb.ServiceInterface;
 using LiteStreamWeb.ServiceModel;
+using ServiceStack.Data;
+using ServiceStack.OrmLite;
 
 namespace LiteStreamWeb.Tests;
 
@@ -14,6 +16,11 @@ public class UnitTest
     {
         appHost = new BasicAppHost().Init();
         appHost.Container.AddTransient<MyServices>();
+        appHost.Container.AddSingleton<IDbConnectionFactory>(new OrmLiteConnectionFactory(
+            ":memory:",
+            SqliteDialect.Provider));
+        using var db = appHost.Container.Resolve<IDbConnectionFactory>().OpenDbConnection();
+        db.CreateTableIfNotExists<MyTable>();
     }
 
     [OneTimeTearDown]

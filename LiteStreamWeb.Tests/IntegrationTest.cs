@@ -3,6 +3,9 @@ using ServiceStack;
 using NUnit.Framework;
 using LiteStreamWeb.ServiceInterface;
 using LiteStreamWeb.ServiceModel;
+using Microsoft.Extensions.Configuration;
+using ServiceStack.Data;
+using ServiceStack.OrmLite;
 
 namespace LiteStreamWeb.Tests;
 
@@ -17,6 +20,12 @@ public class IntegrationTest
 
         public override void Configure(Container container)
         {
+            container.AddSingleton<IDbConnectionFactory>(new OrmLiteConnectionFactory(
+                Configuration.GetConnectionString("DefaultConnection")
+                ?? ":memory:",
+                SqliteDialect.Provider));
+            using var db = container.Resolve<IDbConnectionFactory>().OpenDbConnection();
+            db.CreateTableIfNotExists<MyTable>();
         }
     }
 

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ServiceStack.OrmLite.Sqlite" Version="6.1.0" />
     <ProjectReference Include="..\LiteStreamWeb.ServiceInterface\LiteStreamWeb.ServiceInterface.csproj" />
     <ProjectReference Include="..\LiteStreamWeb.ServiceModel\LiteStreamWeb.ServiceModel.csproj" />
 
