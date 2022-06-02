@@ -8,7 +8,7 @@ public class MyServices : Service
 {
     public object Any(Hello request)
     {
-        Db.Insert(new MyTable
+        Db?.Insert(new MyTable
         {
             Name = request.Name
         });
