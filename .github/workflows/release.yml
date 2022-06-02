@@ -17,10 +17,10 @@ on:
         description: Tag you want to release.
         required: true
 permissions:
-  packages: read/write
+  packages: write
   contents: read
   actions: read
-  repository-projects: read/write
+  repository-projects: write
   
 jobs:
   push_to_registry:
