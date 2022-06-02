@@ -16,7 +16,12 @@ on:
         default: latest
         description: Tag you want to release.
         required: true
-
+permissions:
+  packages: read/write
+  contents: read
+  actions: read
+  repository-projects: read/write
+  
 jobs:
   push_to_registry:
     runs-on: ubuntu-20.04
