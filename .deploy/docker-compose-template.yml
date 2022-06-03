@@ -16,12 +16,11 @@ services:
     image: litestream/litestream
     entrypoint: ["/bin/sh", "-c"]
     command:
-    - |
-       /usr/local/bin/litestream restore -if-db-not-exists -o /data/LiteStreamWeb.sqlite s3://ss-litestream/LiteStreamWeb.sqlite
-       /usr/local/bin/litestream replicate /data/LiteStreamWeb.sqlite s3://ss-litestream/LiteStreamWeb.sqlite
+      - |
+        /usr/local/bin/litestream restore -if-db-not-exists -o /data/LiteStreamWeb.sqlite abs://${AZURE_STORAGEACCOUNT}@${AZURE_CONTAINER}/LiteStreamWeb.sqlite
+        /usr/local/bin/litestream replicate /data/LiteStreamWeb.sqlite abs://${AZURE_STORAGEACCOUNT}@${AZURE_CONTAINER}/LiteStreamWeb.sqlite
     environment:
-      LITESTREAM_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      LITESTREAM_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      LITESTREAM_AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
     volumes:
       - ${APP_NAME}-mydb:/data
 

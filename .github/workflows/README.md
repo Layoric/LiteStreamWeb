@@ -1,8 +1,6 @@
-# ServiceStack mix GitHub Actions
-`release.yml` generated from `x mix release-ghr-vanilla`, this template in designed to help with CI deployment to a dedicated server with SSH access.
-
-## Overview
-`release.yml` is designed to work with a ServiceStack app deploying directly to a single server via SSH. A docker image is built and stored on GitHub's `ghcr.io` docker registry when a GitHub Release is created.
+# Overview
+`release.yml` is designed to work with a ServiceStack app deploying directly to a single server via SSH. A docker image is built and stored on GitHub Packages aka ghcr.io.
+It was created using `x mix litestream-azure` and integrates LiteStream.io with Azure Storage and SQLite.
 
 GitHub Actions specified in `release.yml` then copy files remotely via scp and use `docker-compose` to run the app remotely via SSH.
 
@@ -29,9 +27,12 @@ docker-compose -f ~/nginx-proxy-compose.yml up -d
 This will run an nginx reverse proxy along with a companion container that will watch for additional containers in the same docker network and attempt to initialize them with valid TLS certificates.
 
 ## GitHub Repository setup
-The `release.yml` assumes 6 secrets have been setup.
+The `release.yml` assumes 8 secrets have been setup.
 
 - CR_PAT - GitHub Personal Token with read/write access to packages.
+- AZURE_STORAGEACCOUNT - Azure Storage Account where LiteStream will store SQLite backups.
+- AZURE_CONTAINER - Azure Storage Container name.
+- AZURE_ACCOUNT_KEY - Azure Storage Account Key.
 - DEPLOY_HOST - hostname used to SSH to, this can either be an IP address or subdomain with A record pointing to the server.
 - DEPLOY_PORT - SSH port, usually `22`.
 - DEPLOY_USERNAME - the username being logged into via SSH. Eg, `ubuntu`, `ec2-user`, `root` etc.
@@ -41,7 +42,9 @@ The `release.yml` assumes 6 secrets have been setup.
 These secrets can use the [GitHub CLI](https://cli.github.com/manual/gh_secret_set) for ease of creation. Eg, using the GitHub CLI the following can be set.
 
 ```bash
-gh secret set CR_PAT -b"<CR_PAT, Container Registry Personal Access Token>"
+gh secret set AZURE_STORAGEACCOUNT -b"<AZURE_STORAGEACCOUNT, name to store LiteStream SQLite backups>"
+gh secret set AZURE_CONTAINER -b"<AZURE_CONTAINER>"
+gh secret set AZURE_ACCOUNT_KEY -b"<AZURE_ACCOUNT_KEY>"
 gh secret set DEPLOY_HOST -b"<DEPLOY_HOST, domain or subdomain for your application and server host.>"
 gh secret set DEPLOY_PORT -b"<DEPLOY_PORT, eg SSH port, usually 22>"
 gh secret set DEPLOY_USERNAME -b"<DEPLOY_USERNAME, the username being logged into via SSH. Eg, `ubuntu`, `ec2-user`, `root` etc.>"
@@ -50,6 +53,7 @@ gh secret set LETSENCRYPT_EMAIL -b"<LETSENCRYPT_EMAIL, Email address for your TL
 ```
 
 These secrets are used to populate variables within GitHub Actions and other configuration files.
+
 
 ## What's the process of `release.yml`?
 
