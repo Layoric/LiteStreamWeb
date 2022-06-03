@@ -83,9 +83,10 @@ jobs:
           echo "image_repository_name=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
           echo "domain=${{ secrets.DEPLOY_HOST }}" >> $GITHUB_ENV
           echo "letsencrypt_email=${{ secrets.LETSENCRYPT_EMAIL }}" >> $GITHUB_ENV
-          echo "azure_account_key=${{ secrets.AZURE_ACCOUNT_KEY }}" >> $GITHUB_ENV
-          echo "azure_storage_account=${{ secrets.AZURE_STORAGEACCOUNT }}" >> $GITHUB_ENV
-          echo "azure_container=${{ secrets.AZURE_CONTAINER }}" >> $GITHUB_ENV
+          echo "sftp_username=${{ secrets.SFTP_USERNAME }}" >> $GITHUB_ENV
+          echo "sftp_password=${{ secrets.SFTP_PASSWORD }}" >> $GITHUB_ENV
+          echo "sftp_host=${{ secrets.SFTP_HOST }}" >> $GITHUB_ENV
+          echo "sftp_port=${{ secrets.SFTP_PORT }}" >> $GITHUB_ENV
           echo "TAG_NAME=latest" >> $GITHUB_ENV
           if [ "${{ github.event.release.tag_name }}" != "" ]; then
             echo "TAG_NAME=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
@@ -103,9 +104,10 @@ jobs:
           APP_NAME: ${{ github.event.repository.name }}
           HOST_DOMAIN: ${{ env.domain }}
           LETSENCRYPT_EMAIL: ${{ env.letsencrypt_email }}
-          AZURE_ACCOUNT_KEY: ${{ env.azure_account_key }}
-          AZURE_STORAGEACCOUNT: ${{ env.azure_storage_account }}
-          AZURE_CONTAINER: ${{ env.azure_container }}
+          SFTP_USERNAME: ${{ env.sftp_username }}
+          SFTP_PASSWORD: ${{ env.sftp_password }}
+          SFTP_HOST: ${{ env.sftp_host }}
+          SFTP_PORT: ${{ env.sftp_port }}
         with:
           input: .deploy/docker-compose-template.yml
           output: .deploy/${{ github.event.repository.name }}-docker-compose.yml

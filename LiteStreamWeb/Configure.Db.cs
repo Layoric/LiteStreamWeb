@@ -1,4 +1,3 @@
-using LiteStreamWeb.ServiceModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceStack;
@@ -10,6 +9,13 @@ using ServiceStack.OrmLite;
 
 namespace LiteStreamWeb
 {
+    // Example Data Model
+    // public class MyTable
+    // {
+    //     [AutoIncrement]
+    //     public int Id { get; set; }
+    //     public string Name { get; set; }
+    // }
 
     public class ConfigureDb : IHostingStartup
     {
@@ -24,15 +30,11 @@ namespace LiteStreamWeb
                 appHost.ScriptContext.ScriptMethods.Add(new DbScriptsAsync());
 
                 // Create non-existing Table and add Seed Data Example
-                if (appHost.IsProductionEnvironment())
-                {
-                    // Initialize tables
-                    using var db = appHost.Resolve<IDbConnectionFactory>().Open();
-                    if (db.CreateTableIfNotExists<MyTable>())
-                    {
-                        db.Insert(new MyTable { Name = "Seed Data for new MyTable" });
-                    }
-                }
+                // using var db = appHost.Resolve<IDbConnectionFactory>().Open();
+                // if (db.CreateTableIfNotExists<MyTable>())
+                // {
+                //     db.Insert(new MyTable { Name = "Seed Data for new MyTable" });
+                // }
             });
     }
 }
