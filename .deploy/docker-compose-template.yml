@@ -14,7 +14,7 @@ services:
       LETSENCRYPT_HOST: ${HOST_DOMAIN}
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
     volumes:
-      - ${APP_NAME}-mydb:/app/App_Data
+      - ${APP_NAME}-mydb:/app
   ${APP_NAME}-litestream:
     image: litestream/litestream
     entrypoint: ["/bin/sh", "-c"]
