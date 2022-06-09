@@ -56,6 +56,7 @@ jobs:
           npm install
           npm run build
           [[ -f ./post.build.js ]] && node ./post.build.js
+          echo "ss-litestream"
         working-directory: ./ui
 
       # Assign environment variables used in subsequent steps
