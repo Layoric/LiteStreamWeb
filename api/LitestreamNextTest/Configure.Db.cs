@@ -12,7 +12,7 @@ namespace LitestreamNextTest
     {
         public void Configure(IWebHostBuilder builder) => builder
             .ConfigureServices((context,services) => services.AddSingleton<IDbConnectionFactory>(new OrmLiteConnectionFactory(
-                context.Configuration.GetConnectionString("DefaultConnection") ?? "LitestreamNextTest.sqlite",
+                context.Configuration.GetConnectionString("DefaultConnection") ?? "App_Data/LitestreamNextTest.sqlite",
                 SqliteDialect.Provider)))
             .ConfigureAppHost(appHost =>
             {
