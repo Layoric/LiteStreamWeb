@@ -1,6 +1,6 @@
 # Overview
 `release.yml` is designed to work with a ServiceStack app deploying directly to a single server via SSH. A docker image is built and stored on GitHub Packages aka ghcr.io.
-It was created using `x mix litestream-sftp` and integrates LiteStream.io with SFTP storage and SQLite.
+It was created using `x mix litestream-aws` and integrates LiteStream.io with AWS S3 and SQLite.
 
 GitHub Actions specified in `release.yml` then copy files remotely via scp and use `docker-compose` to run the app remotely via SSH.
 
@@ -30,10 +30,9 @@ This will run an nginx reverse proxy along with a companion container that will 
 The `release.yml` assumes 8 secrets have been setup.
 
 - CR_PAT - GitHub Personal Token with read/write access to packages.
-- SFTP_USERNAME - SFTP username for use with LiteStream.
-- SFTP_PASSWORD - SFTP access for use with LiteStream.
-- SFTP_HOST - SFTP host address for use with LiteStream.
-- SFTP_PORT - SFTP port for use with LiteStream.
+- AWS_S3_BUCKET - AWS S3 Bucket where LiteStream will store SQLite backups.
+- AWS_ACCESS_KEY_ID - AWS access key for programmatic access to AWS APIs.
+- AWS_SECRET_ACCESS_KEY - AWS access secrets for programmatic access to AWS APIs.
 - DEPLOY_HOST - hostname used to SSH to, this can either be an IP address or subdomain with A record pointing to the server.
 - DEPLOY_PORT - SSH port, usually `22`.
 - DEPLOY_USERNAME - the username being logged into via SSH. Eg, `ubuntu`, `ec2-user`, `root` etc.
@@ -43,10 +42,9 @@ The `release.yml` assumes 8 secrets have been setup.
 These secrets can use the [GitHub CLI](https://cli.github.com/manual/gh_secret_set) for ease of creation. Eg, using the GitHub CLI the following can be set.
 
 ```bash
-gh secret set SFTP_USERNAME -b"<SFTP_USERNAME>"
-gh secret set SFTP_PASSWORD -b"<SFTP_PASSWORD>"
-gh secret set SFTP_HOST -b"<SFTP_HOST>"
-gh secret set SFTP_PORT -b"<SFTP_PORT>"
+gh secret set AWS_S3_BUCKET -b"<AWS_S3_BUCKET, name to store LiteStream SQLite backups>"
+gh secret set AWS_ACCESS_KEY_ID -b"<AWS_ACCESS_KEY_ID>"
+gh secret set AWS_SECRET_ACCESS_KEY -b"<AWS_SECRET_ACCESS_KEY>"
 gh secret set DEPLOY_HOST -b"<DEPLOY_HOST, domain or subdomain for your application and server host.>"
 gh secret set DEPLOY_PORT -b"<DEPLOY_PORT, eg SSH port, usually 22>"
 gh secret set DEPLOY_USERNAME -b"<DEPLOY_USERNAME, the username being logged into via SSH. Eg, `ubuntu`, `ec2-user`, `root` etc.>"
