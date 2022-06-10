@@ -3,8 +3,7 @@ services:
   ${APP_NAME}:
     image: ghcr.io/${IMAGE_REPO}:${RELEASE_VERSION}
     depends_on:
-      ${APP_NAME}-litestream:
-        condition: service_healthy
+      - ${APP_NAME}-litestream
     restart: always
     network_mode: bridge
     ports:
@@ -20,11 +19,6 @@ services:
   ${APP_NAME}-litestream:
     image: litestream/litestream
     entrypoint: ["/bin/sh", "-c"]
-    healthcheck:
-      # wait 5 seconds for file restore, since initially app to create database.
-      # Once database is established, change startup to not create tables when in prod,
-      # and change below to check for file to exist, eg `bash -c "[ -f /data/app.db ]"`.
-      test: [ "CMD", "sleep", "5" ]
     command:
       - |
         /usr/local/bin/litestream restore -if-db-not-exists -o /data/app.db sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOST}:${SFTP_PORT}/LitestreamViteTest.sqlite
