@@ -12,6 +12,8 @@ services:
       VIRTUAL_HOST: ${HOST_DOMAIN}
       LETSENCRYPT_HOST: ${HOST_DOMAIN}
       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      DEPLOY_API: ${DEPLOY_API}
+      DEPLOY_CDN: ${DEPLOY_CDN}
     volumes:
       - ${APP_NAME}-mydb:/app
   ${APP_NAME}-litestream:
@@ -19,11 +21,10 @@ services:
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |
-        /usr/local/bin/litestream restore -if-db-not-exists -o /data/app.db s3://${AWS_S3_BUCKET}/LitestreamViteTest.sqlite
-        /usr/local/bin/litestream replicate /data/app.db s3://${AWS_S3_BUCKET}/LitestreamViteTest.sqlite
+        /usr/local/bin/litestream restore -if-db-not-exists -o /data/app.db abs://${AZURE_STORAGEACCOUNT}@${AZURE_CONTAINER}/LitestreamViteTest.sqlite
+        /usr/local/bin/litestream replicate /data/app.db abs://${AZURE_STORAGEACCOUNT}@${AZURE_CONTAINER}/LitestreamViteTest.sqlite
     environment:
-      LITESTREAM_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      LITESTREAM_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      LITESTREAM_AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
     volumes:
       - ${APP_NAME}-mydb:/data
 
