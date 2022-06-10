@@ -4,11 +4,10 @@
 wwwroot/
 *.user
 #sqlite
-.vs/
-*.db
 *.db
 *.db-shm
 *.db-wal
+.vs/
 
 # dependencies
 /node_modules
@@ -43,5 +42,6 @@ yarn-error.log*
 # vercel
 .vercel
 .idea
+.vs
 obj/
 bin/

@@ -5,7 +5,7 @@ const path = require("path")
 const DEPLOY_API = 'https://$DEPLOY_API'
 const DEPLOY_CDN = 'https://$DEPLOY_CDN'
 
-const DIST = '../api/LitestreamNextTest/wwwroot'
+const DIST = '../api/LitestreamVueTest/wwwroot'
 
 // 404.html SPA fallback (supported by GitHub Pages, Cloudflare & Netlify CDNs)
 fs.copyFileSync(
