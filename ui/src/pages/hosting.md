@@ -1,5 +1,5 @@
 ---
-title: App Hosting Costs
+title: Hosting Costs
 ---
 
 <a href="https://jamstack.org">
@@ -20,23 +20,23 @@ A consequence of designing your UI decoupled from your back-end server is that i
 cheaper to host as its static files can be hosted by any web server and is a task highly optimized by CDNs
 who are able to provide generous free & low cost hosting options.
 
-##  [/ui](https://github.com/NetCoreTemplates/vue-ssg/tree/main/ui)
+##  [/ui](https://github.com/NetCoreTemplates/vue-vite/tree/main/ui)
 
 This template takes advantage of its decoupled architecture and uses [GitHub Actions to deploy](/posts/deploy) 
 a copy of its static UI generated assets and hosted on:
 
 ### GitHub Pages CDN
 
-### [vue-ssg.jamstacks.net](https://vue-ssg.jamstacks.net)
+### [vue-vite.jamstacks.net](https://vue-vite.jamstacks.net)
 
 This is an optional deployment step which publishes a copy of your .NET App's `/wwwroot` folder to this templates 
-[gh-pages](https://github.com/NetCoreTemplates/vue-ssg/tree/gh-pages) branch where it's automatically served from 
+[gh-pages](https://github.com/NetCoreTemplates/vue-vite/tree/gh-pages) branch where it's automatically served from 
 [GitHub Pages CDN](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) at **no cost**.
 
 It's an optional but recommended optimization as it allows the initial download from your website to be served
 directly from CDN edge caches.
 
-## [/api](https://github.com/NetCoreTemplates/vue-ssg/tree/main/api)
+## [/api](https://github.com/NetCoreTemplates/vue-vite/tree/main/api)
 
 The .NET 6 `/api` backend server is required for this App's dynamic functions including the Hello API on the home page
 and its [built-in Authentication](https://docs.servicestack.net/auth). 
@@ -48,7 +48,7 @@ directly from its deployed ASP.NET Core server at:
 
 ### [vue-ssg-api.jamstacks.net](https://vue-ssg-api.jamstacks.net)
 
-But when accessed from the CDN [vue-ssg.jamstacks.net](https://vue-ssg.jamstacks.net) that contains a 
+But when accessed from the CDN [vue-vite.jamstacks.net](https://vue-vite.jamstacks.net) that contains a 
 copy of its static `/wwwroot` UI assets, only its back-end JSON APIs are used to power its dynamic features.
 
 ## Total Cost
@@ -59,7 +59,7 @@ copy of its static `/wwwroot` UI assets, only its back-end JSON APIs are used to
 
 Since hosting on GitHub Pages CDN is free, the only cost is for hosting this App's .NET Server which is being hosted 
 from a basic [$10 /mo](https://www.digitalocean.com/pricing) droplet which is currently hosting **25** .NET Docker 
-Apps and demos of [starting project templates](https://servicestack.net/start) which works out to be just under **0.40 /mo**!
+Apps and demos of [starting project templates](https://servicestack.net/start) which works out to be just under **$0.40 /mo**!
 
 ## Jamstack Benefits
 

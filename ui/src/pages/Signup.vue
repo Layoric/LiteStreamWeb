@@ -1,6 +1,6 @@
 <template>
   <AppPage title="Sign Up" class="max-w-xl">
-    
+
     <form @submit.prevent="onSubmit">
       <div class="shadow overflow-hidden sm:rounded-md">
         <ErrorSummary except="displayName,userName,password,confirmPassword,autoLogin"/>
@@ -31,7 +31,7 @@
       </button>
     </span>
     </div>
-    
+
   </AppPage>
 </template>
 

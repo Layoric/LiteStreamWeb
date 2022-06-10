@@ -5,16 +5,14 @@ import { useApp } from "@/api"
 // you can use this to manipulate the document head in any components,
 // they will be rendered correctly in the html results with vite-ssg
 useHead({
-  title: 'LitestreamVueTest',
+  title: 'LitestreamViteTest',
   meta: [
     { name: 'description', content: 'Vite SSG Starter Template' },
   ],
 })
 
-if (!import.meta.env.SSR) {
-  let store = useApp()
-  store.load()
-}
+let app = useApp()
+app.load()
 </script>
 
 <template>

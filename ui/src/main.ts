@@ -1,24 +1,30 @@
 import "@/styles/index.css"
 import "@/styles/main.css"
-import { ViteSSG } from "vite-ssg"
 
-// Auto generated routes by https://github.com/hannoeru/vite-plugin-pages 
+import { createApp } from "vue"
+import { createHead } from "@vueuse/head"
+import { createRouter, createWebHistory } from "vue-router"
+import { createPinia } from "pinia"
+
 import { setupLayouts } from "virtual:generated-layouts"
 import generatedRoutes from "~pages"
-
 import App from "@/App.vue"
 import { configRouter } from "@/routing"
 
+const app = createApp(App)
+const head = createHead()
+
 const routes = setupLayouts(generatedRoutes)
 
-// https://github.com/antfu/vite-ssg
-export const createApp = ViteSSG(
-    App,
-    { routes },
-    (ctx) => {
-        configRouter(ctx.router)
-        
-        // install all modules under `modules/`
-        Object.values(import.meta.globEager('./modules/*.ts')).map(i => i.install?.(ctx))
-    },
-)
+export const router = configRouter(createRouter({
+    history: createWebHistory(),
+    routes,
+}))
+
+const pinia = createPinia()
+
+app
+    .use(head)
+    .use(router)
+    .use(pinia)
+    .mount('#app')

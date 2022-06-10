@@ -6,11 +6,9 @@ import NavFooter from '@/components/NavFooter.vue'
 </script>
 
 <template>
-  <main class="text-gray-700">
-    <NavHeader />
-    <router-view></router-view>
-    <NavFooter />
-  </main>
+  <NavHeader />
+  <router-view></router-view>
+  <NavFooter />
 </template>
 
 <style>

@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const router = useRouter()
+</script>
+
 <template>
   <div>
     <div class="flex items-center">
@@ -7,7 +11,8 @@
       </div>
     </div>
     <div class="mt-2">
-      <button @click="$router.back()" class="inline-flex justify-center py-1 px-2 text-sm">
+      <button @click="router.back()"
+              class="inline-flex justify-center py-1 px-2 shadow-sm text-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
         <MdiArrowLeftThin class="w-5 h-5" />
         back
       </button>

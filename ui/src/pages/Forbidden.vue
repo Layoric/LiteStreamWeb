@@ -4,11 +4,6 @@
     <div class="inline-block text-left h-8 align-middle">
       <h2 class="text-sm leading-10 font-normal m-0 p-0">You do not have access to this page.</h2>
     </div>
-    <div class="mt-2">
-      <button @click="$router.replace('/')" class="inline-flex justify-center py-1 px-2 text-sm">
-        <MdiHome class="w-8 h-8" />
-      </button>
-    </div>
   </div>
 </template>
 <route lang="yaml">

@@ -1,10 +1,11 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const { colors } = defaultTheme
 
 module.exports = {
   content: [
-    "./src/**/*.{vue,md,ts,html}",
+    "./src/**/*.{vue,md}",
+    "./public/**/*.html",
   ],
-  darkMode: 'class', // or 'media'
   theme: {
     extend: {
       // https://github.com/tailwindlabs/tailwindcss-typography
@@ -28,6 +29,7 @@ module.exports = {
             'code::after': {
               content: '""'
             },
+
             maxWidth: '65ch',
             color: 'inherit',
             a: {
@@ -48,7 +50,7 @@ module.exports = {
             h4: { color: 'inherit' },
           }
         },
-      }),      
+      }),
     },
   },
   plugins: [

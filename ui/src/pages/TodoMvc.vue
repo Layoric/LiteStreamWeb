@@ -24,7 +24,7 @@
         </li>
       </ul>
     </div>
-    
+
     <div class="mt-4 flex justify-between">
       <div class="text-gray-400 leading-8 mr-4">
         {{ store.unfinishedTodos.length }} <span class="hidden sm:inline">item(s)</span> left
@@ -41,7 +41,7 @@
           Completed
         </FilterTab>
       </div>
-      
+
       <div class="leading-8 ml-4">
         <a href="#" :class="{ invisible: store.finishedTodos.length === 0 }" @click.prevent="store.removeFinishedTodos()">
           clear <span class="hidden sm:inline">completed</span>
@@ -50,10 +50,10 @@
     </div>
 
     <div class="mt-4 text-center text-gray-400 flex justify-center -ml-6">
-      <SrcLink href="https://github.com/NetCoreTemplates/vue-ssg/blob/main/ui/src/stores/todos.ts">
+      <SrcLink href="https://github.com/NetCoreTemplates/vue-vite/blob/main/ui/src/stores/todos.ts">
         <NotoPineapple class="w-5 h-5 inline-flex" />
       </SrcLink>
-      <SrcLink href="https://github.com/NetCoreTemplates/vue-ssg/blob/main/ui/src/pages/TodoMvc.vue">
+      <SrcLink href="https://github.com/NetCoreTemplates/vue-vite/blob/main/ui/src/pages/TodoMvc.vue">
         <LogosVue class="w-4 h-4 inline-flex" />
       </SrcLink>
     </div>

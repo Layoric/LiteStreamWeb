@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: dotnet build ./api
     - name: Test
-      run: dotnet test ./api/LitestreamVueTest.Tests
+      run: dotnet test ./api/LitestreamViteTest.Tests

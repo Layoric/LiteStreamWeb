@@ -46,7 +46,7 @@ UI development through its dev server which you can do in rider by opening `pack
 ![](https://github.com/ServiceStack/docs/raw/master/docs/images/spa/vue-vite-scripts.png)
 
 
-<img src="https://github.com/ServiceStack/docs/raw/master/docs/images/spa/vue-vite-run-litestreamvuetest.png"
+<img src="https://github.com/ServiceStack/docs/raw/master/docs/images/spa/vue-vite-run-litestreamvitetest.png"
 class="sm:float-right w-72" style="margin:0 0 0 1rem">
 
 This launch vite in HMR mode where any changes to `/ui` assets will have immediate effect.
