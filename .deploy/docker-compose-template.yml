@@ -21,8 +21,8 @@ services:
     image: litestream/litestream
     entrypoint: ["/bin/sh", "-c"]
     healthcheck:
-      start_period: 15s
-      # wait 15 seconds for file restore, since initially app to create database.
+      start_period: 5s
+      # wait 5 seconds for file restore, since initially app to create database.
       # Once database is established, change startup to not create tables when in prod,
       # and change below to check for file to exist, eg `bash -c "[ -f /data/app.db ]"`.
       test: "exit 0" 
