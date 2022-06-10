@@ -19,6 +19,12 @@ services:
   ${APP_NAME}-litestream:
     image: litestream/litestream
     entrypoint: ["/bin/sh", "-c"]
+    healthcheck:
+      start_period: 15s
+      # wait 15 seconds for file restore, since initially app to create database.
+      # Once database is established, change startup to not create tables when in prod,
+      # and change below to check for file to exist, eg `bash -c "[ -f /data/app.db ]"`.
+      test: "exit 0" 
     command:
       - |
         /usr/local/bin/litestream restore -if-db-not-exists -o /data/app.db sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOST}:${SFTP_PORT}/LitestreamViteTest.sqlite
