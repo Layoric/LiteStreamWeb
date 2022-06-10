@@ -21,10 +21,8 @@ services:
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |
-        /usr/local/bin/litestream restore -if-db-not-exists -o /data/app.db abs://${AZURE_STORAGEACCOUNT}@${AZURE_CONTAINER}/LitestreamVueTest.sqlite
-        /usr/local/bin/litestream replicate /data/app.db abs://${AZURE_STORAGEACCOUNT}@${AZURE_CONTAINER}/LitestreamVueTest.sqlite
-    environment:
-      LITESTREAM_AZURE_ACCOUNT_KEY: ${AZURE_ACCOUNT_KEY}
+        /usr/local/bin/litestream restore -if-db-not-exists -o /data/app.db sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOST}:${SFTP_PORT}/LitestreamVueTest.sqlite
+        /usr/local/bin/litestream replicate /data/app.db sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOST}:${SFTP_PORT}/LitestreamVueTest.sqlite
     volumes:
       - ${APP_NAME}-mydb:/data
 
