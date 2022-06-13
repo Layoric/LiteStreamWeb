@@ -17,12 +17,15 @@ namespace LitestreamViteTest
             .ConfigureAppHost(appHost =>
             {
                 // Create non-existing Table and add Seed Data Example
-                using var db = appHost.Resolve<IDbConnectionFactory>().Open();                
-                if (db.CreateTableIfNotExists<Booking>())
+                if (!appHost.IsProductionEnvironment())
                 {
-                    db.CreateBooking("First Booking!", RoomType.Queen, 10, 100, "employee@email.com");
-                    db.CreateBooking("Booking 2", RoomType.Double, 12, 120, "manager@email.com");
-                    db.CreateBooking("Booking the 3rd", RoomType.Suite, 13, 130, "employee@email.com");
+                    using var db = appHost.Resolve<IDbConnectionFactory>().Open();                
+                    if (db.CreateTableIfNotExists<Booking>())
+                    {
+                        db.CreateBooking("First Booking!", RoomType.Queen, 10, 100, "employee@email.com");
+                        db.CreateBooking("Booking 2", RoomType.Double, 12, 120, "manager@email.com");
+                        db.CreateBooking("Booking the 3rd", RoomType.Suite, 13, 130, "employee@email.com");
+                    }
                 }
             });
     }
