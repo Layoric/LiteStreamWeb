@@ -25,8 +25,7 @@ services:
       timeout: 10m
       retries: 1
     command:
-      - |
-        /usr/local/bin/litestream replicate /data/app.db sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOST}:${SFTP_PORT}/LitestreamViteTest.sqlite
+      - /usr/local/bin/litestream replicate /data/app.db sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOST}:${SFTP_PORT}/LitestreamViteTest.sqlite
     volumes:
       - ${APP_NAME}-mydb:/data
 
