@@ -8,7 +8,7 @@ namespace LitestreamViteTest.ServiceInterface
     {
         public object Any(Hello request)
         {
-            return new HelloResponse { Result = $"Hello, {request.Name}!" };
+            return new HelloResponse { Result = $"Hello, {request.Name}!!!!11one" };
         }
     }
 }
