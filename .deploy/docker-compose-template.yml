@@ -22,13 +22,10 @@ services:
     entrypoint: ["/bin/sh", "-c"]
     # Timeout of health check will need to depend on size of db, and speed of network to host.
     healthcheck:
-      test: /usr/local/bin/litestream restore -if-db-not-exists -o /data/app.db s3://${AWS_S3_BUCKET}/LitestreamViteTest.sqlite
+      test: /usr/local/bin/litestream restore -if-db-not-exists -o /data/app.db sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOST}:${SFTP_PORT}/LitestreamViteTest.sqlite
       timeout: 10m
       retries: 1
-    command: /usr/local/bin/litestream replicate /data/app.db s3://${AWS_S3_BUCKET}/LitestreamViteTest.sqlite
-    environment:
-      LITESTREAM_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      LITESTREAM_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    command: /usr/local/bin/litestream replicate /data/app.db sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOST}:${SFTP_PORT}/LitestreamViteTest.sqlite
     volumes:
       - ${APP_NAME}-mydb:/data
 
