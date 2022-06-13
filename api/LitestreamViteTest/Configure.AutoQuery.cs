@@ -24,10 +24,7 @@ namespace LitestreamViteTest
                     //IncludeTotal = true,
                 });
 
-                if (!appHost.IsProductionEnvironment())
-                {
-                    appHost.Resolve<ICrudEvents>().InitSchema();
-                }
+                appHost.Resolve<ICrudEvents>().InitSchema();
             });
     }
 }
